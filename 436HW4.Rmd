@@ -1,0 +1,54 @@
+---
+title: "436HW4"
+output:
+  pdf_document: default
+  html_document: default
+date: "2023-04-18"
+---
+
+```{r}
+fastfood_df <- read.csv('https://uwmadison.box.com/shared/static/ilvsjlr3dfxv8ok188ex9kl58q52jx4s.csv')
+```
+
+```{r}
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(ggplot2)
+```
+
+# Visualization 1
+```{r}
+ggplot(fastfood_df, aes(x = restaurant, y = calories)) +
+  geom_boxplot() +
+  scale_y_continuous(limits = c(0, 2000)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Distribution of Total Calories by Food Category",
+       x = "Food Category",
+       y = "Total Calories")
+```
+
+**The essential questions that this visualization helps to show is the different calorie numbers for each of the unique fast food restaurants in the dataset.**
+
+**Aspects of the design that support exploration of the essential question include the use of a boxplot to display the distribution of the data, the restriction of the y-axis to 0-2000 calories to focus on the majority of the data, and the rotation of the x-axis labels for readability. One trade-off made was the omission of individual data points, which could provide more specific analysis but may also clutter the plot.**
+
+**The key findings from this plot that we can see are that Burger King, McDonalds and Sonic have the highest median calorie number while Taco Bell and Chick Fil-A have the lowest. McDonalds has the larest outlier point as well. Finally, all eight fast food restaurants are very close in general, it would be interesting to compare them to healthier chains.**
+
+**The visualization was created using the ggplot2 package in R, and there were no data preparation steps required since the data was already in a usable format.**
+
+# Visualization 2
+```{r}
+ggplot(fastfood_df, aes(x = protein, y = total_fat)) +
+  geom_line() +
+  facet_wrap(restaurant ~.) +
+  labs(x = "Protein", y = "Total Fat", title = "Fast Food Trends by Restaurant") +
+  theme_bw()
+```
+
+**The essential question that this visualization is supposed to inform is how the total fat content of fast food items varies with respect to the protein content in different fast food restaurants.**
+
+**The visualization uses a scatter plot where the x-axis represents the protein content of the fast food item and the y-axis represents the total fat content of the fast food item. The plot is faceted by restaurant name, which allows for easy comparison of trends across different restaurants.The line plot was chosen to visualize the relationship between the two variables. The plot uses black and white theme (theme_bw()) to emphasize the relationship between the two variables.**
+
+**From the visualization, we can see that there are significant differences in the total fat content of fast food items across different restaurants. Some restaurants, such as McDonald's and Burger King, tend to have higher total fat content compared to other restaurants. Additionally, we can see that as protein content increases, the total fat content tends to increase as well. However, there are some outliers where fast food items have high protein content but relatively low total fat content.**
+
+**The visualization was created using the ggplot2 package in R, and there were no data preparation steps required since the data was already in a usable format. We did use the facet_wrap function to create the new plot.**
